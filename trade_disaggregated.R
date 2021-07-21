@@ -10,15 +10,18 @@ library(lubridate)
 
 # USA Trade Online Harmonized System (HS) District-level Data -- https://usatrade.census.gov/data/Perspective60/Browse/BrowseTables.aspx
 # want both imports and exports (must generate separate reports)
-# you will need to fiddle with the built-in system to get output in a workable format. I opted for a panel format (3 columns)
-# will also want to construct a new time series set under the "Time" dimension
+# must create an account to access USA Trade Online
+# you will need to fiddle with the built-in system to get output in a workable format: 
+# # I opted for a panel format in country, month with trade value across the top
+# will also want to construct a new time series set under the "Time" dimension -- make sure you have Jan 2010-most recent release
+# I downloaded the report as a multi-dimensional .csv, then saved it as an excel workbook to the data folder
 # Help PDFs are available from a drop down menu at the top of the website
 
 # import, clean, merge
 exp <- read_excel("data/Standard Report - Exports.xlsx", skip = 7, 
                   col_types = c("text", "date", "numeric"), 
                   col_names = c("Country", "Date", "Export Value"))
-imp <- read_excel("data/Standard Report - Imports.xlsx", skip = 7, 
+imp <- read_excel("data/Standard Report - Imports.xlsx", skip = 8, 
                   col_types = c("text", "date", "numeric"), 
                   col_names = c("Country", "Date", "Import Value"))
 exp <- exp %>% fill(Country)
@@ -43,7 +46,7 @@ dygraph_world <- dygraph(tradeWorld, xlab = "Date", ylab = "Billions of US Dolla
   dyOptions(drawPoints = TRUE, strokeWidth = 3, rightGap = TRUE) %>%
   dyLegend(width = 150, labelsSeparateLines = TRUE) %>%
   dyHighlight() %>%
-  dyShading(from = "2020-03-01", to= "2021-03-01" ,color = "#cecece")
+  dyShading(from = "2020-02-01", to= "2020-04-01" ,color = "#cecece")
 dygraph_world
 saveWidget(dygraph_world, "dygraph world trade.html")
 
@@ -52,7 +55,7 @@ tradeWorld <- trade[trade$`Country` %in% "World Total",-c(1)]
 tradeWorld <- tradeWorld %>%
   gather(key = "variable", value = "value", -Date)
 graph_world <- ggplot(tradeWorld, aes(x = Date, y = value)) + labs(x = "Date", y = "Billions of US Dollars") +
-  geom_rect(xmin=as.Date("2020-03-01"), xmax=as.Date("2021-03-01"), ymin=0, ymax=Inf, fill="#cecece", alpha=0.2) +
+  geom_rect(xmin=as.Date("2020-02-01"), xmax=as.Date("2020-04-01"), ymin=0, ymax=Inf, fill="#cecece", alpha=0.2) +
   geom_line(aes(color=variable), size=1) +
   scale_color_manual(values = c("#B22234", "#4f86f7"))
 graph_world
@@ -69,7 +72,7 @@ dygraph_MX <- dygraph(tradeMX, xlab = "Date", ylab = "Billions of US Dollars") %
   dyOptions(drawPoints = TRUE, strokeWidth = 3, rightGap = TRUE) %>%
   dyLegend(width = 150, labelsSeparateLines = TRUE) %>%
   dyHighlight() %>%
-  dyShading(from = "2020-03-01", to= "2021-03-01" ,color = "#cecece")
+  dyShading(from = "2020-02-01", to= "2020-04-01" ,color = "#cecece")
 dygraph_MX
 saveWidget(dygraph_MX, "dygraph mexico trade.html")
 
@@ -78,7 +81,7 @@ tradeMX <- trade[trade$`Country` %in% "Mexico", -c(1)]
 tradeMX <- tradeMX %>%
   gather(key="variable", value="value", -Date)
 graph_MX <- ggplot(tradeMX, aes(x = Date, y = value)) + labs(x = "Date", y = "Billions US Dollars") +
-  geom_rect(xmin=as.Date("2020-03-01"), xmax=as.Date("2021-03-01"), ymin=0, ymax=Inf, fill="#cecece", alpha=0.2) +
+  geom_rect(xmin=as.Date("2020-02-01"), xmax=as.Date("2020-04-01"), ymin=0, ymax=Inf, fill="#cecece", alpha=0.2) +
   geom_line(aes(color=variable), size=1) +
   scale_color_manual(values = c("#B22234", "#4f86f7"))
 graph_MX
@@ -94,7 +97,7 @@ dygraph_CA <- dygraph(tradeCA, xlab = "Date", ylab = "Billions of US Dollars") %
   dyOptions(drawPoints = TRUE, strokeWidth = 3, rightGap = TRUE) %>%
   dyLegend(width = 150, labelsSeparateLines = TRUE) %>%
   dyHighlight() %>%
-  dyShading(from = "2020-03-01", to= "2021-03-01" ,color = "#cecece")
+  dyShading(from = "2020-02-01", to= "2020-04-01" ,color = "#cecece")
 dygraph_CA
 saveWidget(dygraph_CA, "dygraph canada trade.html")
 
@@ -103,7 +106,7 @@ tradeCA <- trade[trade$`Country` %in% "Canada", -c(1)]
 tradeCA <- tradeCA %>%
   gather(key="variable", value="value", -Date)
 graph_CA <- ggplot(tradeCA, aes(x = Date, y = value)) + labs(x = "Date", y = "US Dollars") +
-  geom_rect(xmin=as.Date("2020-03-01"), xmax=as.Date("2021-03-01"), ymin=0, ymax=Inf, fill="#cecece", alpha=0.2) +
+  geom_rect(xmin=as.Date("2020-02-01"), xmax=as.Date("2020-04-01"), ymin=0, ymax=Inf, fill="#cecece", alpha=0.2) +
   geom_line(aes(color=variable), size=1) +
   scale_color_manual(values = c("#B22234", "#4f86f7"))
 graph_CA
@@ -123,7 +126,7 @@ dygraph_NAFTA <- dygraph(tradeNAFTA, xlab = "Date", ylab = "Billions of US Dolla
   dyOptions(drawPoints = TRUE, strokeWidth = 3, rightGap = TRUE) %>%
   dyLegend(width = 150, labelsSeparateLines = TRUE) %>%
   dyHighlight() %>%
-  dyShading(from = "2020-03-01", to= "2021-03-01" ,color = "#cecece")
+  dyShading(from = "2020-02-01", to= "2020-04-01" ,color = "#cecece")
 dygraph_NAFTA
 saveWidget(dygraph_NAFTA, "dygraph nafta trade.html")
 
@@ -131,7 +134,7 @@ saveWidget(dygraph_NAFTA, "dygraph nafta trade.html")
 tradeNAFTA <- tradeNAFTA %>%
   gather(key="variable", value="value", -Date)
 graph_NAFTA <- ggplot(tradeNAFTA, aes(x = Date, y = value)) + labs(x = "Date", y = "US Dollars") +
-  geom_rect(xmin=as.Date("2020-03-01"), xmax=as.Date("2021-03-01"), ymin=0, ymax=Inf, fill="#cecece", alpha=0.2) +
+  geom_rect(xmin=as.Date("2020-02-01"), xmax=as.Date("2020-04-01"), ymin=0, ymax=Inf, fill="#cecece", alpha=0.2) +
   geom_line(aes(color=variable), size=1) +
   scale_color_manual(values = c("#B22234", "#4f86f7"))
 graph_NAFTA
@@ -147,7 +150,7 @@ dygraph_CH <- dygraph(tradeCH, xlab = "Date", ylab = "Billions of US Dollars") %
   dyOptions(drawPoints = TRUE, strokeWidth = 3, rightGap = TRUE) %>%
   dyLegend(width = 150, labelsSeparateLines = TRUE) %>%
   dyHighlight() %>%
-  dyShading(from = "2020-03-01", to= "2021-03-01" ,color = "#cecece")
+  dyShading(from = "2020-02-01", to= "2020-04-01" ,color = "#cecece")
 dygraph_CH
 saveWidget(dygraph_CH, "dygraph china trade.html")
 
@@ -156,7 +159,7 @@ tradeCH <- trade[trade$`Country` %in% "China", -c(1)]
 tradeCH <- tradeCH %>%
   gather(key="variable", value="value", -Date)
 graph_CH <- ggplot(tradeCH, aes(x = Date, y = value)) + labs(x = "Date", y = "US Dollars") + 
-  geom_rect(xmin=as.Date("2020-03-01"), xmax=as.Date("2021-03-01"), ymin=0, ymax=Inf, fill="#cecece", alpha=0.2) +
+  geom_rect(xmin=as.Date("2020-02-01"), xmax=as.Date("2020-04-01"), ymin=0, ymax=Inf, fill="#cecece", alpha=0.2) +
   geom_line(aes(color=variable), size=1) +
   scale_color_manual(values = c("#B22234", "#4f86f7"))
 graph_CH
@@ -172,7 +175,7 @@ dygraph_EU <- dygraph(tradeEU, xlab = "Date", ylab = "Billions of US Dollars") %
   dyOptions(drawPoints = TRUE, strokeWidth = 3, rightGap = TRUE) %>%
   dyLegend(width = 150, labelsSeparateLines = TRUE) %>%
   dyHighlight() %>%
-  dyShading(from = "2020-03-01", to= "2021-03-01" ,color = "#cecece")
+  dyShading(from = "2020-02-01", to= "2020-04-01" ,color = "#cecece")
 dygraph_EU
 saveWidget(dygraph_EU, "dygraph europe trade.html")
 
@@ -181,7 +184,7 @@ tradeEU <- trade[trade$Country %in% "Europe", -c(1)]
 tradeEU <- tradeEU %>%
   gather(key="variable", value="value", -Date)
 graph_EU <- ggplot(tradeEU, aes(x = Date, y = value)) + labs(x = "Date", y = "US Dollars") +
-  geom_rect(xmin=as.Date("2020-03-01"), xmax=as.Date("2021-03-01"), ymin=0, ymax=Inf, fill="#cecece", alpha=0.2) +
+  geom_rect(xmin=as.Date("2020-02-01"), xmax=as.Date("2020-04-01"), ymin=0, ymax=Inf, fill="#cecece", alpha=0.2) +
   geom_line(aes(color=variable), size=1) +
   scale_color_manual(values = c("#B22234", "#4f86f7"))
 graph_EU
@@ -197,7 +200,7 @@ dygraph_JP <- dygraph(tradeJP, xlab = "Date", ylab = "Billions of US Dollars") %
   dyOptions(drawPoints = TRUE, strokeWidth = 3, rightGap = TRUE) %>%
   dyLegend(width = 150, labelsSeparateLines = TRUE) %>%
   dyHighlight() %>%
-  dyShading(from = "2020-03-01", to= "2021-03-01" ,color = "#cecece")
+  dyShading(from = "2020-02-01", to= "2020-04-01" ,color = "#cecece")
 dygraph_JP
 saveWidget(dygraph_JP, "dygraph japan trade.html")
 
@@ -206,7 +209,7 @@ tradeJP <- trade[trade$Country %in% "Japan", -c(1)]
 tradeJP <- tradeJP %>%
   gather(key="variable", value="value", -Date)
 graph_JP <- ggplot(tradeJP, aes(x = Date, y = value)) + labs(x = "Date", y = "US Dollars") + 
-  geom_rect(xmin=as.Date("2020-03-01"), xmax=as.Date("2021-03-01"), ymin=0, ymax=Inf, fill="#cecece", alpha=0.2) +
+  geom_rect(xmin=as.Date("2020-02-01"), xmax=as.Date("2020-04-01"), ymin=0, ymax=Inf, fill="#cecece", alpha=0.2) +
   geom_line(aes(color=variable), size=1) +
   scale_color_manual(values = c("#B22234", "#4f86f7"))
 graph_JP

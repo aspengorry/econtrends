@@ -58,7 +58,7 @@ dygraph_trade <- dygraph(trade, ylab = "Billions of 2012 Dollars", xlab = "Date"
   dyLegend(width = 150, labelsSeparateLines = TRUE) %>%
   dyHighlight() %>%
   dyShading(from = "2007-12-01", to="2009-06-01", color = "#cecece") %>%
-  dyShading(from = "2020-03-01", to= "2021-03-01" ,color = "#FDFD96")
+  dyShading(from = "2020-02-01", to= "2020-04-01" ,color = "#cecece")
 dygraph_trade
 saveWidget(dygraph_trade, "dygraph real trade.html")
 
@@ -66,7 +66,7 @@ trade <- trade_real %>%
   gather(key = "variable", value = "value", -date)
 graph_trade <- ggplot(trade, aes(x = date, y = value)) + labs(x = "Date", y = "Billions of 2012 Dollars") +
   geom_rect(xmin=as.Date("2007-12-01"), xmax=as.Date("2009-06-01"), ymin=0, ymax=Inf, fill="#cecece", alpha=0.2) +
-  geom_rect(xmin=as.Date("2020-03-01"), xmax=as.Date("2021-03-01"), ymin=0, ymax=Inf, fill="#cecece", alpha=0.2) +
+  geom_rect(xmin=as.Date("2020-02-01"), xmax=as.Date("2020-04-01"), ymin=0, ymax=Inf, fill="#cecece", alpha=0.2) +
   geom_line(aes(color=variable), size=1) +
   scale_color_manual(values = c("#B22234", "#4f86f7"))
 graph_trade
