@@ -7,7 +7,7 @@ Scripts and data for Clemson Economic Trends website and blog
 
 - Census monthly trade numbers are released the first week of the subsequent month
 
-**Labor Market**
+**Employment**
 
 - National employment figures are released the first week of the subsequent month
 - National earnings figures are released the second week of the subsequent month
@@ -19,4 +19,18 @@ Scripts and data for Clemson Economic Trends website and blog
 - 
 
 **Money and Prices**
+
+-
+
+**Income and Spending**
+
+- 
+
+**Public Finances**
+
+- 
+
+**Finance**
+
+- 
 
