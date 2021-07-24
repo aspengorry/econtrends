@@ -38,3 +38,7 @@ Scripts and data for Clemson Economic Trends website and blog
 
 - N/A
 
+## GitHub Resources
+
+- I found this resource helpful in linking Git, GitHub, and RStudio and getting familiar with making changes to the repository locally in RStudio, committing them, and then pushing them to the remote repository: https://happygitwithr.com/
+  - Of particular interest are lessons 4-9, 12, 16
