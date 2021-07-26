@@ -9,13 +9,7 @@ library(tidyr)
 library(lubridate)
 
 # USA Trade Online Harmonized System (HS) District-level Data -- https://usatrade.census.gov/data/Perspective60/Browse/BrowseTables.aspx
-# want both imports and exports (must generate separate reports)
-# must create an account to access USA Trade Online
-# you will need to fiddle with the built-in system to get output in a workable format: 
-# # I opted for a panel format in country, month with trade value across the top
-# will also want to construct a new time series set under the "Time" dimension -- make sure you have Jan 2010-most recent release
-# I downloaded the report as a multi-dimensional .csv, then saved it as an excel workbook to the data folder
-# Help PDFs are available from a drop down menu at the top of the website
+# See README_trade.md for instructions on how I created the reports
 
 # import, clean, merge
 exp <- read_excel("data/Standard Report - Exports.xlsx", skip = 7, 
@@ -45,6 +39,9 @@ dygraph_world <- dygraph(tradeWorld, xlab = "Date", ylab = "Billions of US Dolla
   dySeries("Import Value", label = "Imports", color = "#4f86f7") %>%
   dyOptions(drawPoints = TRUE, strokeWidth = 3, rightGap = TRUE) %>%
   dyLegend(width = 150, labelsSeparateLines = TRUE) %>%
+  dyAxis("x", ticker = 'function(min, max, pixels, opts, dygraph, vals) {
+    return Dygraph.getDateAxis(min, max, Dygraph.ANNUAL, opts, dygraph);
+  }') %>%
   dyHighlight() %>%
   dyShading(from = "2020-02-01", to= "2020-04-01" ,color = "#cecece")
 dygraph_world
@@ -111,7 +108,9 @@ graph_CA <- ggplot(tradeCA, aes(x = Date, y = value)) + labs(x = "Date", y = "US
   scale_color_manual(values = c("#B22234", "#4f86f7"))
 graph_CA
 
-# NAFTA (MX + CA) -- need to run first lines of MX, CA code to create those dataframes
+# NAFTA (MX + CA)
+tradeCA <- trade[trade$`Country` %in% "Canada", -c(1)]
+tradeMX <- trade[trade$`Country` %in% "Mexico", -c(1)]
 expNAFTA <- data.frame(tradeMX$`Export Value` + tradeCA$`Export Value`)
 impNAFTA <- data.frame(tradeMX$`Import Value` + tradeCA$`Import Value`)
 tradeNAFTA <- data.frame(tradeCA$Date, expNAFTA, impNAFTA)

@@ -56,6 +56,9 @@ dygraph_trade <- dygraph(trade, ylab = "Billions of 2012 Dollars", xlab = "Date"
   dySeries("total imports", label = "Imports", color = "#4f86f7") %>%
   dyOptions(drawPoints = TRUE, strokeWidth = 3, rightGap = TRUE) %>%
   dyLegend(width = 150, labelsSeparateLines = TRUE) %>%
+  dyAxis("x", ticker = 'function(min, max, pixels, opts, dygraph, vals) {
+    return Dygraph.getDateAxis(min, max, Dygraph.ANNUAL, opts, dygraph);
+  }') %>%
   dyHighlight() %>%
   dyShading(from = "2007-12-01", to="2009-06-01", color = "#cecece") %>%
   dyShading(from = "2020-02-01", to= "2020-04-01" ,color = "#cecece")
