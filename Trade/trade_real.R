@@ -63,7 +63,7 @@ dygraph_trade <- dygraph(trade, ylab = "Billions of 2012 Dollars", xlab = "Date"
   dyShading(from = "2007-12-01", to="2009-06-01", color = "#cecece") %>%
   dyShading(from = "2020-02-01", to= "2020-04-01" ,color = "#cecece")
 dygraph_trade
-saveWidget(dygraph_trade, "dygraph real trade.html")
+saveWidget(dygraph_trade, "real-trade.html")
 
 trade <- trade_real %>%
   gather(key = "variable", value = "value", -date)

@@ -45,7 +45,7 @@ dygraph_world <- dygraph(tradeWorld, xlab = "Date", ylab = "Billions of US Dolla
   dyHighlight() %>%
   dyShading(from = "2020-02-01", to= "2020-04-01" ,color = "#cecece")
 dygraph_world
-saveWidget(dygraph_world, "dygraph world trade.html")
+saveWidget(dygraph_world, "world-trade.html")
 
 # static
 tradeWorld <- trade[trade$`Country` %in% "World Total",-c(1)]
@@ -71,7 +71,7 @@ dygraph_MX <- dygraph(tradeMX, xlab = "Date", ylab = "Billions of US Dollars") %
   dyHighlight() %>%
   dyShading(from = "2020-02-01", to= "2020-04-01" ,color = "#cecece")
 dygraph_MX
-saveWidget(dygraph_MX, "dygraph mexico trade.html")
+saveWidget(dygraph_MX, "mexico-trade.html")
 
 #static
 tradeMX <- trade[trade$`Country` %in% "Mexico", -c(1)]
@@ -96,7 +96,7 @@ dygraph_CA <- dygraph(tradeCA, xlab = "Date", ylab = "Billions of US Dollars") %
   dyHighlight() %>%
   dyShading(from = "2020-02-01", to= "2020-04-01" ,color = "#cecece")
 dygraph_CA
-saveWidget(dygraph_CA, "dygraph canada trade.html")
+saveWidget(dygraph_CA, "canada-trade.html")
 
 #static
 tradeCA <- trade[trade$`Country` %in% "Canada", -c(1)]
@@ -127,7 +127,7 @@ dygraph_NAFTA <- dygraph(tradeNAFTA, xlab = "Date", ylab = "Billions of US Dolla
   dyHighlight() %>%
   dyShading(from = "2020-02-01", to= "2020-04-01" ,color = "#cecece")
 dygraph_NAFTA
-saveWidget(dygraph_NAFTA, "dygraph nafta trade.html")
+saveWidget(dygraph_NAFTA, "nafta-trade.html")
 
 #static
 tradeNAFTA <- tradeNAFTA %>%
@@ -151,7 +151,7 @@ dygraph_CH <- dygraph(tradeCH, xlab = "Date", ylab = "Billions of US Dollars") %
   dyHighlight() %>%
   dyShading(from = "2020-02-01", to= "2020-04-01" ,color = "#cecece")
 dygraph_CH
-saveWidget(dygraph_CH, "dygraph china trade.html")
+saveWidget(dygraph_CH, "china-trade.html")
 
 #static
 tradeCH <- trade[trade$`Country` %in% "China", -c(1)]
@@ -176,7 +176,7 @@ dygraph_EU <- dygraph(tradeEU, xlab = "Date", ylab = "Billions of US Dollars") %
   dyHighlight() %>%
   dyShading(from = "2020-02-01", to= "2020-04-01" ,color = "#cecece")
 dygraph_EU
-saveWidget(dygraph_EU, "dygraph europe trade.html")
+saveWidget(dygraph_EU, "europe-trade.html")
 
 #static
 tradeEU <- trade[trade$Country %in% "Europe", -c(1)]
@@ -201,7 +201,7 @@ dygraph_JP <- dygraph(tradeJP, xlab = "Date", ylab = "Billions of US Dollars") %
   dyHighlight() %>%
   dyShading(from = "2020-02-01", to= "2020-04-01" ,color = "#cecece")
 dygraph_JP
-saveWidget(dygraph_JP, "dygraph japan trade.html")
+saveWidget(dygraph_JP, "japan-trade.html")
 
 #static
 tradeJP <- trade[trade$Country %in% "Japan", -c(1)]
@@ -237,5 +237,5 @@ graph_growth <- dygraph(tradeWorld, ylab = "YoY Growth Rate", xlab = "Date")  %>
   dyLegend(width = 150, labelsSeparateLines = TRUE) %>%
   dyBarChart()
 graph_growth
-saveWidget(graph_growth, "dygraph growth rates.html")
+saveWidget(graph_growth, "growth-rates.html")
 

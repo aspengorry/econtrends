@@ -56,7 +56,7 @@ dygraph_goods <- dygraph(goods, ylab = "Billions of US Dollars", xlab = "Date") 
   dyHighlight() %>%
   dyShading(from = "2020-03-01", to= "2021-03-01" ,color = "#cecece")
 dygraph_goods
-saveWidget(dygraph_goods, "dygraph goods trade.html")
+saveWidget(dygraph_goods, "goods-trade.html")
 
 #static
 goods <- trade_gs[,c(1,6,9)] %>%
@@ -81,7 +81,7 @@ dygraph_services <- dygraph(services, ylab = "Billions of US Dollars", xlab = "D
   dyHighlight() %>%
   dyShading(from = "2020-02-01", to= "2020-04-01" ,color = "#cecece")
 dygraph_services
-saveWidget(dygraph_services, "dygraph services trade.html")
+saveWidget(dygraph_services, "services-trade.html")
 
 #static
 services <- trade_gs[,c(1,7,10)] %>%
@@ -106,7 +106,7 @@ dygraph_gs <- dygraph(gs, ylab = "Billions of US Dollars", xlab = "Date") %>%
   dyHighlight() %>%
   dyShading(from = "2020-02-01", to= "2020-04-01" ,color = "#cecece")
 dygraph_gs
-saveWidget(dygraph_gs, "dygraph total trade.html")
+saveWidget(dygraph_gs, "total-trade.html")
 
 # static
 gs <- trade_gs[,c(1,5,8)] %>%
@@ -130,7 +130,7 @@ dygraph_tb <- dygraph(tb, ylab = "Billions of US Dollars", xlab = "Date") %>%
   dyHighlight() %>%
   dyShading(from = "2020-02-01", to= "2020-04-01" ,color = "#cecece")
 dygraph_tb
-saveWidget(dygraph_tb, "dygraph trade balance.html")
+saveWidget(dygraph_tb, "trade-balance.html")
 
 #static
 tb <- trade_gs[,c(1,2)] %>%
