@@ -8,7 +8,8 @@ library(tidyverse)
 library(tidyr)
 library(lubridate)
 
-# USA Trade Online Harmonized System (HS) District-level Data -- https://usatrade.census.gov/data/Perspective60/Browse/BrowseTables.aspx
+# USA Trade Online Harmonized System (HS) District-level Data:
+# https://usatrade.census.gov/data/Perspective60/Browse/BrowseTables.aspx
 # See README_trade.md for instructions on how I created the reports
 
 # import, clean, merge
@@ -27,6 +28,7 @@ trade$Date <- as.Date(trade$Date, format = "%Y-%m-%d")
 # scale trade value: dollars -> billions
 trade$`Export Value` <- trade$`Export Value`/1000000000
 trade$`Import Value` <- trade$`Import Value`/1000000000
+
 # GRAPHS
 
 # World Total
