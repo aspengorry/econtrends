@@ -58,7 +58,7 @@ dygraph_goods <- dygraph(goods, ylab = "Billions of US Dollars", xlab = "Date") 
   dyOptions(drawPoints = TRUE, strokeWidth = 3, rightGap = TRUE) %>%
   dyLegend(width = 150, labelsSeparateLines = TRUE) %>%
   dyHighlight() %>%
-  dyShading(from = "2020-03-01", to= "2021-03-01" ,color = "#cecece")
+  dyShading(from = "2020-02-01", to= "2020-04-01" ,color = "#cecece")
 dygraph_goods
 saveWidget(dygraph_goods, "goods-trade.html")
 
@@ -78,7 +78,7 @@ services <- xts(services, order.by = services$date)
 services <- services[,-c(1)]
 dygraph_services <- dygraph(services, ylab = "Billions of US Dollars", xlab = "Date") %>%
   dySeries("services exports", label = "Exports", color = "#B22234") %>%
-  dySeries("services imports", label = "Imports", color = "#003366") %>%
+  dySeries("services imports", label = "Imports", color = "#4f86f7") %>%
   dyOptions(drawPoints = TRUE, strokeWidth = 3, rightGap = TRUE) %>%
   dyLegend(width = 150, labelsSeparateLines = TRUE) %>%
   dyHighlight() %>%
@@ -102,7 +102,7 @@ gs <- xts(gs, order.by = gs$date)
 gs <- gs[,-c(1)]
 dygraph_gs <- dygraph(gs, ylab = "Billions of US Dollars", xlab = "Date") %>%
   dySeries("total exports", label = "Exports", color = "#B22234") %>%
-  dySeries("total imports", label = "Imports", color = "#003366") %>%
+  dySeries("total imports", label = "Imports", color = "#4f86f7") %>%
   dyOptions(drawPoints = TRUE, strokeWidth = 3, rightGap = TRUE) %>%
   dyLegend(width = 150, labelsSeparateLines = TRUE) %>%
   dyHighlight() %>%
